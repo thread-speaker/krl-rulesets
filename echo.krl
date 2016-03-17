@@ -1,26 +1,21 @@
 ruleset echo {
   meta {
-    name "Hello World"
+    name "Echo"
     description <<
-A first ruleset for the Quickstart
+the echo ruleset
 >>
     author "Aaron Monson"
     logging on
     sharing on
-    provides hello
+    provides echo
   }
-  global {
-    hello = function(obj) {
-      msg = "Hello " + obj
-      msg
-    };
- 
-  }
-  rule hello_world {
+
+  rule hello_world is active {
     select when echo hello
     send_directive("say") with
       something = "Hello World";
   }
+  
   rule echo is active {
     select when echo message input "(.*)" setting(m)
     send_directive("say") with
