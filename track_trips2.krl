@@ -1,8 +1,8 @@
 ruleset track_trips {
   meta {
-    name "Track Trips"
+    name "Track Trips 2"
     description <<
-ruleset for tracking trips
+ruleset for part 2 of the single pico lab
 >>
     author "Aaron Monson"
     logging on
