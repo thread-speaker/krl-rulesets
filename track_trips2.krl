@@ -13,5 +13,11 @@ ruleset for tracking trips
     select when car new_trip mileage "(.*)" setting(m)
     send_directive("trip") with
       trip_length = m;
+	
+	
+    always {
+      raise explicit event 'trip_processed'
+        attributes event:attrs()
+	}
   }
 }
