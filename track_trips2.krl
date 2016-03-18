@@ -26,7 +26,7 @@ ruleset for part 2 of the single pico lab
   }
   
   rule find_long_trips {
-    select when explicit trip_processed "(.*)" setting(m)
+    select when explicit trip_processed mileage "(.*)" setting(m)
     if m > long_trip then
       send_directive("done");
     fired {
