@@ -9,17 +9,32 @@ ruleset for part 3 of the single pico lab
     sharing on
   }
   
-  global { }
+  global {
+    trips = function() {
+      ent:trips
+    }
+    long_trips = function() {
+      ent:long_trips
+    }
+    short_trips = function() {
+      ent:trips.filter(function(trip){
+        //includes element x if true
+        ent:long_trips.all(function(long_trip){
+          trip neq long_trip
+        })
+      })
+    }
+  }
   
   rule collect_trips {
     select when explicit trip_processed mileage "(.+)" setting(m)
-    if (ent:short_trips eq 0) then
+    if (ent:trips eq 0) then
       send_directive("collected first long trip")
     fired {
-      set ent:short_trips ["" + m + ":" + time:now()]
+      set ent:trips ["" + m + ":" + time:now()]
     }
     else {
-      set ent:short_trips ent:short_trips.append(["" + m + ":" + time:now()])
+      set ent:trips ent:trips.append(["" + m + ":" + time:now()])
     }
   }
   
@@ -39,7 +54,7 @@ ruleset for part 3 of the single pico lab
     select when car trip_reset
     send_directive("gotIt")
     always {
-      set ent:short_trips [];
+      set ent:trips [];
       set ent:long_trips [];
     }
   }
