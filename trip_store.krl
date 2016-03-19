@@ -7,6 +7,7 @@ ruleset for part 3 of the single pico lab
     author "Aaron Monson"
     logging on
     sharing on
+    provides trips, long_trips, short_trips
   }
   
   global {
