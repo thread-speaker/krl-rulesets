@@ -27,7 +27,7 @@ ruleset for part 3 of the single pico lab
       set ent:long_trips ["" + m + ":" + time:now()]
     }
     else {
-      ent:long_trips.append("" + m + ":" + time:now())
+      set ent:long_trips ent:long_trips.append(["" + m + ":" + time:now()])
     }
   }
   
