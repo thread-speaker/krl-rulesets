@@ -13,9 +13,13 @@ ruleset for part 3 of the single pico lab
   
   rule collect_trips {
     select when explicit trip_processed mileage "(.+)" setting(m)
-    send_directive("collected short trip")
-    always {
-      set ent:short_trips []
+    if (ent:short_trips eq 0) then
+      send_directive("collected first long trip")
+    fired {
+      set ent:short_trips ["" + m + ":" + time:now()]
+    }
+    else {
+      set ent:short_trips ent:short_trips.append(["" + m + ":" + time:now()])
     }
   }
   
